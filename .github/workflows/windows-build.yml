@@ -1,0 +1,45 @@
+name: Windows build and smoke tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Run public core smoke test
+        shell: powershell
+        run: node .\tests\CoreSmokeTest.js
+
+      - name: Build Windows x64 packages
+        shell: powershell
+        run: .\src\OpenESXStudioInstaller\Build.ps1
+
+      - name: Test generated installer and embedded application
+        shell: powershell
+        run: |
+          $testPath = Join-Path $env:RUNNER_TEMP 'openesx-self-test'
+          $arguments = '--self-test "' + $testPath + '"'
+          $process = Start-Process -FilePath '.\outputs\OpenESX-Studio-2.0-RC5-Setup.exe' -ArgumentList $arguments -Wait -PassThru -WindowStyle Hidden
+          if ($process.ExitCode -ne 0) { throw 'Installer self-test failed.' }
+          Get-Content -LiteralPath (Join-Path $testPath 'installer-self-test.txt')
+
+      - name: Upload tested packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenESX-Studio-2.0-RC5-Windows-x64
+          path: |
+            outputs/OpenESX-Studio-2.0-RC5-Setup.exe
+            outputs/OpenESX-Studio-2.0-RC5-Portable.exe
+            outputs/OpenESX-Studio-2.0-RC5-Windows-x64.zip
+            outputs/README-OpenESX-Studio-2.0-RC5-Windows.txt
+            outputs/SHA256-OpenESX-Studio-2.0-RC5-Windows.txt
+
