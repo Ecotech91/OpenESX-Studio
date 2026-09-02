@@ -1,0 +1,20 @@
+# Build output
+/outputs/
+/release-assets/
+/src/OpenESXStudioInstaller/build/
+/src/OpenESXStudioInstaller/Package/
+/src/OpenESXStudioInstaller/SelfTest*/
+/src/OpenESXStudioInstaller/Runtime/
+
+# Private test material
+*.esx
+*.wav
+*.bak.esx
+
+# Local tooling
+.DS_Store
+Thumbs.db
+*.user
+*.suo
+*.log
+
