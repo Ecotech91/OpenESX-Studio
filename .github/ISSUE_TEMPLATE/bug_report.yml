@@ -1,0 +1,73 @@
+name: Bug report / Fehlerbericht
+description: Report a reproducible OpenESX Studio problem
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing. Bitte keine ESX- oder WAV-Dateien mit Audio hochladen, das du nicht weitergeben darfst.
+  - type: input
+    id: app-version
+    attributes:
+      label: OpenESX Studio version
+      placeholder: 2.0 RC5
+    validations:
+      required: true
+  - type: input
+    id: windows-version
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 24H2 x64
+    validations:
+      required: true
+  - type: dropdown
+    id: korg-model
+    attributes:
+      label: Korg model
+      options:
+        - ESX-1 SmartMedia
+        - ESX-SD
+        - No hardware test / kein Hardwaretest
+        - Other / anderes Modell
+    validations:
+      required: true
+  - type: input
+    id: firmware
+    attributes:
+      label: Korg system/firmware version
+      description: If known / falls bekannt
+  - type: input
+    id: storage
+    attributes:
+      label: Card or storage details
+      placeholder: SDHC 16 GB, FAT32, formatted on Korg
+  - type: textarea
+    id: steps
+    attributes:
+      label: Exact steps to reproduce
+      placeholder: Numbered steps from opening the file to the error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result and complete error text
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I tested with a copy and still have the original backup.
+          required: true
+        - label: I will not publicly upload audio that I do not have permission to share.
+          required: true
+

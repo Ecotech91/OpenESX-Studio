@@ -1,0 +1,39 @@
+name: Feature request / Verbesserungsvorschlag
+description: Suggest a focused improvement
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem should be solved?
+      description: Welches konkrete Problem soll gelöst werden?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested behavior
+      description: Beschreibe, wie die Funktion im Programm arbeiten soll.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Samples and WAV import
+        - Pattern Studio and preview
+        - Songs
+        - Global and MIDI
+        - Card and bank manager
+        - Installer and Windows integration
+        - Documentation or translation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+
